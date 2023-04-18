@@ -1,0 +1,8 @@
+.vscode/
+node_modules/
+demo
+.prettierrc
+tailwind.config.js
+package.json
+package-lock.json
+mars_db.sql

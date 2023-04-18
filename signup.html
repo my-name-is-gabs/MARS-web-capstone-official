@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M.A.R.S Quiz</title>
+    <link rel="stylesheet" href="./dist/output.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/MARS_logo.ico"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="h-screen flex justify-center items-center">
+      <div
+        class="absolute bg-slate-500 text-white flex flex-col items-center text-xl py-9 px-9 hidden"
+        id="success"
+      >
+        <h1>Account Created successfully</h1>
+        <img src="./assets/bars.svg" width="50" alt="" />
+      </div>
+      <form
+        action="./server/createAccount.php"
+        method="post"
+        class="p-6 bg-[#eee] flex flex-col items-center max-w-[500px] w-full rounded-lg gap-5 shadow-lg shadow-black"
+        id="signup_form"
+      >
+        <div class="w-full max-w-[200px] flex items-center">
+          <img src="./assets/MARS_logo.png" alt="Logo" class="w-full" />
+        </div>
+
+        <div class="flex flex-col gap-4 w-full py-4 border-t-4 border-t-Active">
+          <span class="text-red-600" id="error_message"></span>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="p-3 focus:border-2 focus:border-lightPrimary rounded-md hover:shadow-md hover:shadow-lightPrimary"
+            placeholder="Enter username"
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="p-3 focus:border-2 focus:border-lightPrimary rounded-md hover:shadow-md hover:shadow-lightPrimary"
+            placeholder="Enter password"
+            required
+          />
+
+          <input
+            type="password"
+            name="re-password"
+            id="re-password"
+            class="p-3 focus:border-2 focus:border-lightPrimary rounded-md hover:shadow-md hover:shadow-lightPrimary"
+            placeholder="Confirm Password"
+            required
+          />
+
+          <input
+            type="submit"
+            name="submit"
+            value="Sign up"
+            class="bg-Active text-white p-3 rounded-full cursor-pointer"
+          />
+        </div>
+
+        <div class="border-t-4 border-t-Active w-full text-center">
+          <div class="p-4">
+            <a href="index.html" class="hover:underline hover:text-Primary"
+              >Already have an account?</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById('signup_form');
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const re_pass = document.getElementById('re-password');
+      const error_message = document.getElementById('error_message');
+
+      form.addEventListener('submit', e => {
+        const user_value = username.value;
+        const pass_value = password.value;
+        const re_pass_value = re_pass.value;
+
+        const u_pattern_bool = /\W+/i.test(user_value);
+        const pass_pattern_bool =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/.test(pass_value);
+
+        if (!pass_pattern_bool) {
+          e.preventDefault();
+          error_message.textContent = `*Password must be at least 8 character length with 1 upper case and
+            a number`;
+        }
+
+        if (u_pattern_bool) {
+          e.preventDefault();
+          error_message.textContent =
+            '*Username must not contain any special character';
+        }
+
+        if (pass_value !== re_pass_value) {
+          e.preventDefault();
+          error_message.textContent = '*Password does not match';
+          password.value = '';
+          re_pass.value = '';
+        }
+      });
+
+      const params = new URLSearchParams(window.location.search);
+
+      if (params.get('error')) {
+        error_message.textContent = '*username already taken';
+      }
+
+      if (params.get('success')) {
+        document.getElementById('success').classList.remove('hidden');
+        setTimeout(() => {
+          window.location.assign('./index.html');
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>

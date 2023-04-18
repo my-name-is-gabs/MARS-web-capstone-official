@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M.A.R.S Quiz</title>
+    <link rel="stylesheet" href="../dist/output.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/MARS_logo.ico"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="h-screen flex justify-center items-center">
+      <form
+        action="./server/validateAccount.php"
+        method="post"
+        class="p-6 bg-[#eee] flex flex-col items-center max-w-[500px] w-full rounded-lg gap-5 shadow-lg shadow-black"
+      >
+        <div class="w-full max-w-[200px] flex items-center">
+          <img src="./assets/MARS_logo.png" alt="Logo" class="w-full" />
+        </div>
+
+        <div
+          class="flex flex-col gap-4 w-full py-4 text-center border-t-4 border-t-Active"
+        >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="p-3 focus:border-2 focus:border-lightPrimary rounded-md hover:shadow-md hover:shadow-lightPrimary"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="p-3 focus:border-2 focus:border-lightPrimary rounded-md hover:shadow-md hover:shadow-lightPrimary"
+            placeholder="Password"
+            required
+          />
+
+          <button type="submit" class="bg-Active text-white p-3 rounded-full">
+            Login
+          </button>
+        </div>
+
+        <div class="border-t-4 border-t-Active w-full text-center">
+          <div class="p-4 w-full inline-flex justify-around">
+            <a href="signup.html" class="hover:underline hover:text-Primary"
+              >Create an account</a
+            >
+
+            <a
+              href="admin/login.php"
+              class="hover:underline hover:text-Primary sm:inline hidden"
+              >Admin</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+    <script>
+      history.forward(0);
+    </script>
+  </body>
+</html>
